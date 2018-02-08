@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import {
     BrowserRouter as Router,
     Route,
-    Link
+    Link,
+    Switch,
+    Redirect
 } from 'react-router-dom'
 
 import logo from './logo.svg';
@@ -22,6 +24,22 @@ const About = () => (
         <h2>About</h2>
     </div>
 )
+
+const NoMatch = () =>{
+    return (
+        <div>
+            <h2>No Match</h2>
+        </div>
+    )
+}
+
+const WillMatch = () => {
+    return(
+        <div>
+            <h2>Matched</h2>
+        </div>
+    )
+}
 
 const Topic = ({ match }) => (
     <div>
@@ -68,13 +86,24 @@ class App extends Component {
                       <li><Link to="/about">About</Link></li>
                       <li><Link to="/topics">Topics</Link></li>
                       <li><Link to="/emonjis">Emonjis</Link></li>
+                      <li><Link to="/old-match">Old Match, to be redirected</Link></li>
+                      <li><Link to="/will-match">Will Match</Link></li>
+                      <li><Link to="/will-not-match">Will Not Match</Link></li>
+                      <li><Link to="/also/will/not/match">Also Will Not Match</Link></li>
                   </ul>
 
-                  <Route exact path="/" component={Home}/>
-                  <Route path="/about" component={About}/>
-                  <Route path="/topics" component={Topics}/>
-                  <Route path="/emonjis" component={Emonjis}/>
 
+                  <Switch>
+                      <Route exact path="/" component={Home}/>
+                      <Route path="/about" component={About}/>
+                      <Route path="/topics" component={Topics}/>
+                      <Route path="/emonjis" component={Emonjis}/>
+
+                      <Route path="/" exact component={Home}/>
+                      <Redirect from="/old-match" to="/will-match"/>
+                      <Route path="/will-match" component={WillMatch}/>
+                      <Route component={NoMatch}/>
+                  </Switch>
               </div>
           </Router>
       </div>
