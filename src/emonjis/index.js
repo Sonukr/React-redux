@@ -17,7 +17,6 @@ class Emonjis extends Component {
 
   getData = () => {
       fetch('/data.json')
-      // fetch('https://facebook.github.io/react-native/movies.json')
           .then((response) => response.json())
           .then((responseJson) => {
 
@@ -44,9 +43,9 @@ class Emonjis extends Component {
           .catch((error) => {
               console.error(error);
           })
-  }
+  };
 
-  filterItems = (q, dataToBeFiltered) => {
+  filterItems = (q, dataToBeFiltered, key) => {
         return(
             dataToBeFiltered.filter(function(el) {
                 return el.name.toLowerCase().indexOf(q.toLowerCase()) > -1;
@@ -63,8 +62,6 @@ class Emonjis extends Component {
       })
   };
 
-
-
   searchData  = (elemet) => {
       let q =  elemet.target.value ;
       if(q == ''){
@@ -77,7 +74,6 @@ class Emonjis extends Component {
   render() {
 
     return (
-
       <div className="App">
         <p>jjjjjj</p>
           <div >

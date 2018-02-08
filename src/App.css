@@ -26,19 +26,19 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
- ul {
+.column ul {
    margin: 0;
    padding: 0;
    text-align: left;
  }
- li{
+.column ul li{
    list-style: number;
  }
- ul ul {
+.column ul ul {
    margin-left: 16px;
 
  }
-ul ul li{
+.column ul ul li{
   list-style: circle;
 }
 
@@ -54,10 +54,28 @@ table{
 .column{
   width: 23%;
   float: left;
-  min-height: 400px;
+  min-height: 350px;
   border:1px solid #333;
   margin: 12px;
 }
 .columnInner{
   padding: 24px 48px;
+}
+.menu {
+
+
+}
+
+.menu > ul{
+  display: flex;
+  flex: 1;
+  padding: 0;
+  margin: 0;
+  border-bottom: 1px solid #333;
+}
+
+.menu > ul li{
+  display: flex;
+  flex-direction: row;
+  padding: 16px;
 }
