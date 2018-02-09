@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import styles from '../App.css'
+import styles from '../../App.css'
 
-class Emonjis extends Component {
+class EmonjisComponent extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -104,4 +104,4 @@ class Emonjis extends Component {
   }
 }
 
-export default Emonjis;
+export const Emonjis  = EmonjisComponent;

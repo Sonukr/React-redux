@@ -9,7 +9,9 @@ import {
 
 import logo from './logo.svg';
 import styles from './App.css';
-import Emonjis from './emonjis'
+import {Emonjis} from './components/emonjis'
+import {SidebarRouting} from "./components/sidebar";
+import RecursiveExample from "./components/RecRouting";
 
 
 
@@ -86,6 +88,8 @@ class App extends Component {
                       <li><Link to="/about">About</Link></li>
                       <li><Link to="/topics">Topics</Link></li>
                       <li><Link to="/emonjis">Emonjis</Link></li>
+                      <li><Link to="/sidebar">Sidebar Routing</Link></li>
+                      <li><Link to="/recursive">Recursive Routing</Link></li>
                       <li><Link to="/old-match">Old Match, to be redirected</Link></li>
                       <li><Link to="/will-match">Will Match</Link></li>
                       <li><Link to="/will-not-match">Will Not Match</Link></li>
@@ -98,6 +102,8 @@ class App extends Component {
                       <Route path="/about" component={About}/>
                       <Route path="/topics" component={Topics}/>
                       <Route path="/emonjis" component={Emonjis}/>
+                      <Route path="/sidebar" component={SidebarRouting}/>
+                      <Route path="/recursive" component={RecursiveExample}/>
 
                       <Route path="/" exact component={Home}/>
                       <Redirect from="/old-match" to="/will-match"/>
