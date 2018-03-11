@@ -15,7 +15,7 @@ class EmonjisComponent extends Component {
       )
   }
 
-  getData = () => {
+  getData ()  {
       fetch('/data.json')
           .then((response) => response.json())
           .then((responseJson) => {
@@ -31,7 +31,7 @@ class EmonjisComponent extends Component {
                   }
                   sortedData.push(item)
               }
-              var d = sortedData.splice(0,100);
+              var d = sortedData.splice(0,sortedData.length);
               this.setState({
                   isLoading: false,
                   data : d
