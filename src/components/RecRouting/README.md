@@ -1,14 +1,14 @@
 ### About Routing Component 
 
-- Here, In this component i used [React-router](https://github.com/ReactTraining/react-router) and [React-router-dom](https://www.npmjs.com/package/react-router-dom) for routing purpose.
+- Here, In this component i am using [React-router-dom](https://www.npmjs.com/package/react-router-dom) for routing purpose.
+- [React-router](https://github.com/ReactTraining/react-router) is dependency of `React-router-dom`. So it will be downloaded to serve core functionality of `React-router`.
 ### Why we need React-router-dom ?
-- Well, that's because of we want to handle other things like, browserhistory, link(open link in new tab and other redirection and all), and  StaticRouter (for server rendering)  and many more.
+- React-router-dom comes with extra features like, `BrowserRouter` , `Link`, `Route` and many more **including all the `React-router`'s** core features.
+- Also, because of we want to handle other things like, browserhistory, link(open link in new tab and other redirection and all), and  StaticRouter (for server rendering)  and many more.
 - You can find more about this [Here](https://github.com/ReactTraining/react-router/issues/4648).
 
 ### How to set-up a routing in react app ?
-
-- To enable routing in react-app, we need these two package [React-router](https://github.com/ReactTraining/react-router) and [React-router-dom](https://www.npmjs.com/package/react-router-dom). then follow the steps below .
-
+- To enable routing in react-app(client-side), we need to install [React-router-dom](https://www.npmjs.com/package/react-router-dom). then follow the steps below .
 -  Import the required methods from packages in your app.js file. ```BrowserRouter```, ```Route```, ```Link```,  ```Switch```,   ```Redirect```
     
     ```javascript
