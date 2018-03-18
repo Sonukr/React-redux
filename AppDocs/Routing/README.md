@@ -148,4 +148,4 @@
     }
     export default App;
     ```
-### That's It, You hava a working Routing in react app. 😄 🎉
+### That's It, You have a working Routing in react app. 😄 🎉
