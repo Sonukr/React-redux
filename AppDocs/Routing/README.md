@@ -2,7 +2,14 @@
 
 - Here, In this component i am using [React-router-dom](https://www.npmjs.com/package/react-router-dom) for routing purpose.
 - [React-router](https://github.com/ReactTraining/react-router) is dependency of `React-router-dom`. So it will be downloaded to serve core functionality of `React-router`.
-### Why we need React-router-dom ?
+
+### Difference between `react-router-dom` & `react-router`?
+
+ - `react-router` exports the core components and functions. `react-router-dom` exports DOM-aware components, like `<Link>` (which renders an anchor tag) and `<BrowserRouter>` (which interacts with the browser's window.history ).
+
+ - `react-router-dom` re-exports all of `react-router's` exports, so you ***only*** need to ***import*** from `react-router-dom` in your project.
+
+### Why we need `react-router-dom` ?
 - React-router-dom comes with extra features like, `BrowserRouter` , `Link`, `Route` and many more **including all the `React-router`'s** core features.
 - Also, because of we want to handle other things like, browserhistory, link(open link in new tab and other redirection and all), and  StaticRouter (for server rendering)  and many more.
 - You can find more about this [Here](https://github.com/ReactTraining/react-router/issues/4648).
