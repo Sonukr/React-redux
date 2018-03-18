@@ -15,7 +15,11 @@
 - You can find more about this [Here](https://github.com/ReactTraining/react-router/issues/4648).
 
 ### How to set-up a routing in react app ?
-- To enable routing in react-app(client-side), we need to install [React-router-dom](https://www.npmjs.com/package/react-router-dom). then follow the steps below .
+- To enable routing in react-app(client-side), we need to install [React-router-dom](https://www.npmjs.com/package/react-router-dom) by using NPM, then follow the steps below .
+    ```sh
+        npm i react-router-dom --save
+    ```
+-  `--save` is used for add this package in package.json file.
 -  Import the required methods from packages in your app.js file. ```BrowserRouter```, ```Route```, ```Link```,  ```Switch```,   ```Redirect```
     
     ```javascript
