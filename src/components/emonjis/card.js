@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 
-export class Card extends Component {
-    
+export class Card extends Component {    
   render() {
     const item= this.props.item;
     return (
@@ -27,4 +26,3 @@ export class Card extends Component {
   }
 }
 
-export default Card

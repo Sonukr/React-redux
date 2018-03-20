@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styles from '../../App.css'
 import { Card } from './card';
 
 class EmonjisComponent extends Component {
@@ -80,7 +81,7 @@ class EmonjisComponent extends Component {
               <input type="text" onChange={this.searchData} placeholder="Filter from here..."/>
           </div>
           {this.state.data.map((item, i) => (
-            <Card item = {item}/>
+            <Card item = {item} key={i}/>
           ))}
       </div>
     );
