@@ -7,8 +7,6 @@ import {
     Redirect
 } from 'react-router-dom'
 
-import logo from './logo.svg';
-import styles from './App.css';
 import {Emonjis} from './components/emonjis'
 import {SidebarRouting} from "./components/sidebar";
 import RecursiveExample from "./components/RecRouting";

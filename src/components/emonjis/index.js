@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styles from '../../App.css'
+import { Card } from './card';
 
 class EmonjisComponent extends Component {
   constructor(props){
@@ -64,7 +64,7 @@ class EmonjisComponent extends Component {
 
   searchData  = (elemet) => {
       let q =  elemet.target.value ;
-      if(q == ''){
+      if(q === ''){
           this.getData()
       }else {
           this.getQueryData(q);
@@ -80,24 +80,7 @@ class EmonjisComponent extends Component {
               <input type="text" onChange={this.searchData} placeholder="Filter from here..."/>
           </div>
           {this.state.data.map((item, i) => (
-              <div className="column" key={i}>
-                  <div className="columnInner">
-                      <ul key={i}>
-                          <li>Name: {item.name}</li>
-                          <li>Char : {item.data.char}</li>
-                          <li>Category: {item.data.category}</li>
-                          <li>Keywords
-                              <ul>
-                                  <li>
-                                      {item.data.keywords.map((item, i) => (
-                                          <div key={i}>{item}</div>
-                                      ))}
-                                  </li>
-                              </ul>
-                          </li>
-                      </ul>
-                  </div>
-              </div>
+            <Card item = {item}/>
           ))}
       </div>
     );

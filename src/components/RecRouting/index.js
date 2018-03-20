@@ -12,7 +12,7 @@ const PEEPS = [
     { id: 3, name: 'David', friends: [ 1, 2 ] }
 ]
 
-const find = (id) => PEEPS.find(p => p.id == id)
+const find = (id) => PEEPS.find(p => p.id === id)
 const location = window.location;
 
 const RecursiveExample = () => (
