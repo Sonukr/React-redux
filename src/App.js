@@ -1,116 +1,75 @@
 import React, { Component } from 'react';
 import {
     BrowserRouter as Router,
-    Route,
-    Link,
-    Switch,
-    Redirect
+    Route
 } from 'react-router-dom'
+import { HomePage } from './components/home';
 
-import {Emonjis} from './components/emonjis'
-import {SidebarRouting} from "./components/sidebar";
-import RecursiveExample from "./components/RecRouting";
+/*
+ * The Provider component provides
+ * the React store to all its child
+ * components so we don't need to pass
+ * it explicitly to all the components.
+ */
+import {Provider} from 'react-redux';
 
+import {createStore, applyMiddleware, compose} from 'redux';
+import { createLogger } from 'redux-logger'
 
-
-const Home = () => (
-    <div>
-        <h2>Home</h2>
-    </div>
-)
-
-const About = () => (
-    <div>
-        <h2>About</h2>
-    </div>
-)
-
-const NoMatch = () =>{
-    return (
-        <div>
-            <h2>No Match</h2>
-        </div>
-    )
-}
-
-const WillMatch = () => {
-    return(
-        <div>
-            <h2>Matched</h2>
-        </div>
-    )
-}
-
-const Topic = ({ match }) => (
-    <div>
-        <h3>{match.params.topicId}</h3>
-    </div>
-)
-
-const Topics = ({ match }) => (
-    <div>
-        <h2>Topics</h2>
-        <ul>
-            <li>
-                <Link to={`${match.url}/rendering`}>
-                    Rendering with React
-                </Link>
-            </li>
-            <li>
-                <Link to={`${match.url}/components`}>
-                    Components
-                </Link>
-            </li>
-            <li>
-                <Link to={`${match.url}/props-v-state`}>
-                    Props v. State
-                </Link>
-            </li>
-        </ul>
-
-        <Route path={`${match.url}/:topicId`} component={Topic}/>
-        <Route exact path={match.url} render={() => (
-            <h3>Please select a topic.</h3>
-        )}/>
-    </div>
-)
-
+import { Reducer } from './reducer';
 class App extends Component {
+
+    constructor(props) {
+        super(props);
+
+        /*
+        * This creates the logger so we
+        * can see all the dispatched actions and prev/next state into console.
+        * 
+        */
+        const logger = createLogger();
+        const initialState = {};
+        /*
+        * The enhancer are passed when
+        * creating the Redux store to
+        * add some extra functionality.
+        *
+        * In this case we add a logger
+        * middleware that write some debug
+        * information every time the
+        * state is changed.
+        *
+        * We also add the Redux DevTools
+        * so we can easily debug the state.
+        */
+        const enhancer = compose(
+            applyMiddleware(logger)
+        );
+        
+        /*
+        * This creates the store so we
+        * can listen to changes and
+        * dispatch actions.
+        */
+        const store = createStore(Reducer, initialState,enhancer);
+        this.store = store;
+        /* or we can write in a single function.
+        *
+        */ 
+        // this.store =compose(
+        //     applyMiddleware(logger)
+        // )(createStore)(Reducer);
+    }
+
+
   render() {
     return (
-      <div className="App">
-          <Router>
-              <div className="menu">
-                  <ul>
-                      <li><Link to="/">Home</Link></li>
-                      <li><Link to="/about">About</Link></li>
-                      <li><Link to="/topics">Topics</Link></li>
-                      <li><Link to="/emonjis">Emonjis</Link></li>
-                      <li><Link to="/sidebar">Sidebar Routing</Link></li>
-                      <li><Link to="/recursive">Recursive Routing</Link></li>
-                      <li><Link to="/old-match">Old Match, to be redirected</Link></li>
-                      <li><Link to="/will-match">Will Match</Link></li>
-                      <li><Link to="/will-not-match">Will Not Match</Link></li>
-                      <li><Link to="/also/will/not/match">Also Will Not Match</Link></li>
-                  </ul>
-
-
-                  <Switch>
-                      <Route exact path="/" component={Home}/>
-                      <Route path="/about" component={About}/>
-                      <Route path="/topics" component={Topics}/>
-                      <Route path="/emonjis" component={Emonjis}/>
-                      <Route path="/sidebar" component={SidebarRouting}/>
-                      <Route path="/recursive" component={RecursiveExample}/>
-
-                      <Route path="/" exact component={Home}/>
-                      <Redirect from="/old-match" to="/will-match"/>
-                      <Route path="/will-match" component={WillMatch}/>
-                      <Route component={NoMatch}/>
-                  </Switch>
-              </div>
-          </Router>
-      </div>
+        //  Provider component which makes the Redux store available to all its descendants. Without this component you would have to pass the store as a prop to all the components that need it.
+      <Provider store={this.store}>
+        <Router>
+            <Route  path="/" component={HomePage}/>
+        </Router>
+      </Provider>
     );
   }
 }

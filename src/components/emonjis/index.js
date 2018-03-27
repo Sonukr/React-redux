@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styles from '../../App.css'
+import '../../App.css'
 import { Card } from './card';
 
 class EmonjisComponent extends Component {
