@@ -4,6 +4,8 @@ import {
     Route
 } from 'react-router-dom'
 import { HomePage } from './components/home';
+// import our Main Reducer
+import { Reducer } from './reducer';
 
 /*
  * The Provider component provides
@@ -12,11 +14,27 @@ import { HomePage } from './components/home';
  * it explicitly to all the components.
  */
 import {Provider} from 'react-redux';
-
 import {createStore, applyMiddleware, compose} from 'redux';
 import { createLogger } from 'redux-logger'
 
-import { Reducer } from './reducer';
+/* Redux persist handle the Ui rendering and state on refresh. 
+ * persistStore will create a persist store and Persistgate delays the 
+ * rendering of your app's UI until your persisted state has been retrieved and saved to redux.
+ * NOTE the PersistGate loading prop can be null, or any react instance, e.g. loading={<Loading />}
+*/ 
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage' // defaults to localStorage for web and AsyncStorage for react-native
+
+
+// Persist configuration
+const persistConfig = {
+    key: 'root',
+    storage,
+}
+// create a persist reducer with existing main reducer.
+const persistedReducer = persistReducer(persistConfig, Reducer)
+
 class App extends Component {
 
     constructor(props) {
@@ -51,7 +69,8 @@ class App extends Component {
         * can listen to changes and
         * dispatch actions.
         */
-        const store = createStore(Reducer, initialState,enhancer);
+        //const store = createStore(Reducer,initialState,enhancer); // Store with main reducer, initialState and enhancer(middleware).
+        const store = createStore(persistedReducer,initialState,enhancer); // Store with persistedReducer is new store which wraps the main reducer
         this.store = store;
         /* or we can write in a single function.
         *
@@ -59,6 +78,11 @@ class App extends Component {
         // this.store =compose(
         //     applyMiddleware(logger)
         // )(createStore)(Reducer);
+
+        /* creating a persist store and passing our existing reducer store into that.
+         * It will create a localstoreage store, which will handle your state on page refresh.
+        */ 
+        this.persistor = persistStore(this.store);
     }
 
 
@@ -66,9 +90,12 @@ class App extends Component {
     return (
         //  Provider component which makes the Redux store available to all its descendants. Without this component you would have to pass the store as a prop to all the components that need it.
       <Provider store={this.store}>
-        <Router>
-            <Route  path="/" component={HomePage}/>
-        </Router>
+          {/* Persistgate delays the rendering of your app's UI until your persisted state has been retrieved and saved to redux. */}
+          <PersistGate loading={null} persistor={this.persistor}>
+            <Router>
+                <Route  path="/" component={HomePage}/>
+            </Router>
+          </PersistGate>
       </Provider>
     );
   }
